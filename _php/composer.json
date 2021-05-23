@@ -7,7 +7,8 @@
             "MaxLZp\\Brickweb\\Tests\\": "tests/"
         },
         "files": [
-            "src/Brackets/brackets.php"
+            "src/Brackets/brackets.php",
+            "src/Attributes/attributes.php"
         ]
     },
     "authors": [
