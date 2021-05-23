@@ -1,0 +1,49 @@
+:root{
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+.equation{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    &__inner{
+        box-shadow: 0 0 10px hsl(0, 0%, 80%);
+        padding: 1rem;
+    }
+
+    &__form{}
+
+    &__result-container{}
+
+    &__result{
+        font-weight: bold;
+    }
+}
+
+.equation-form{
+
+    font-weight: bold;
+    text-transform: uppercase;
+
+    &__input{
+        width: 4rem;
+    }
+
+    &__times{
+        position: relative;
+        top: 0.2rem;
+    }
+    &__degree{
+        font-size: .8rem;
+        position: relative;
+        top: -.5rem;
+    }
+}
