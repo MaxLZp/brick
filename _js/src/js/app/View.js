@@ -22,6 +22,11 @@ function View(containerId) {
     this.update = update;
 
     const container = tryGetContainer(containerId);
+    const _inputsSelector = '.equation-form > .equation-form__input';
+    const _inputASelector = '.equation-form #a';
+    const _inputBSelector = '.equation-form #b';
+    const _inputCSelector = '.equation-form #c';
+    const _resultSelector = '.equation__result-container > .equation__result';
 
     /**
      * Get input by it's selector
@@ -61,7 +66,7 @@ function View(containerId) {
      */
     function setInputChangeHandler(callback) {
         if (typeof callback === 'function') {
-            const inputs = document.querySelectorAll('.equation-form > .equation-form__input');
+            const inputs = document.querySelectorAll(_inputsSelector);
             for (const input of inputs) {
                 input.addEventListener('input', callback);
             }
@@ -86,7 +91,7 @@ function View(containerId) {
      * Update result
      */
     function update(result) {
-        getInputBy('.equation__result-container > .equation__result').innerHTML = result.roots.join('; ');
+        getInputBy(_resultSelector).innerHTML = result.roots.join('; ');
     }
 
 
@@ -94,21 +99,21 @@ function View(containerId) {
      * Get A
      */
     function getA() {
-        return getInputBy('.equation-form #a').value;
+        return getInputBy(_inputASelector).value;
     }
 
     /**
      * Get B
      */
     function getB() {
-        return getInputBy('.equation-form #b').value;
+        return getInputBy(_inputBSelector).value;
     }
 
     /**
      * Get C
      */
     function getC() {
-        return getInputBy('.equation-form #c').value;
+        return getInputBy(_inputCSelector).value;
     }
 
     /**
@@ -116,7 +121,7 @@ function View(containerId) {
      * @param a
      */
     function setA(a) {
-        getInputBy('.equation-form #a').value = a;
+        getInputBy(_inputASelector).value = a;
     }
 
     /**
@@ -124,7 +129,7 @@ function View(containerId) {
      * @param b
      */
     function setB(b) {
-        getInputBy('.equation-form #b').value = b;
+        getInputBy(_inputBSelector).value = b;
     }
 
     /**
@@ -132,7 +137,7 @@ function View(containerId) {
      * @param c
      */
     function setC(c) {
-        getInputBy('.equation-form #c').value = c;
+        getInputBy(_inputCSelector).value = c;
     }
 
     const layout = `
