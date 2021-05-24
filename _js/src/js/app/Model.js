@@ -3,9 +3,7 @@
 module.exports = Model;
 
 function Model() {
-    /**
-     * Prevent use without new
-     */
+
     if (!(this instanceof Model)) {
         return new Model();
     }
@@ -20,11 +18,9 @@ function Model() {
     this.getResult = getResult;
     this.getRoots = getRoots;
 
-
     let _a = 1;
     let _b = 1;
     let _c = 1;
-
 
     /**
      * Return discriminant
@@ -38,8 +34,11 @@ function Model() {
      */
     function getRoots() {
         const discriminant = this.getDiscriminant();
-        if (discriminant < 0) {
+        if (+discriminant < 0) {
             return ["No roots"];
+        }
+        if (+this.getA() === 0) {
+            return ["coefficient at x2 must not be equal to 0"];
         }
         return [
             (-1 * this.getB() + Math.sqrt(discriminant)) / (2 * this.getA()),
@@ -59,7 +58,6 @@ function Model() {
 
     /**
      * Return A
-     * @returns {string}
      */
     function getA() {
         return _a;
@@ -70,12 +68,11 @@ function Model() {
      * @param a
      */
     function setA(a) {
-        _a = a;
+        _a = +a;
     }
 
     /**
      * Return B
-     * @returns {string}
      */
     function getB() {
         return _b;
@@ -86,12 +83,11 @@ function Model() {
      * @param b
      */
     function setB(b) {
-        _b = b;
+        _b = +b;
     }
 
     /**
      * Return C
-     * @returns {string}
      */
     function getC() {
         return _c;
@@ -102,7 +98,7 @@ function Model() {
      * @param c
      */
     function setC(c) {
-        _c = c;
+        _c = +c;
     }
 
 }

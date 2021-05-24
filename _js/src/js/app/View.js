@@ -4,9 +4,6 @@ module.exports = View;
 
 function View(containerId) {
 
-    /**
-     * Prevent use without new
-     */
     if (!(this instanceof View)) {
         return new View(containerId);
     }
@@ -21,7 +18,7 @@ function View(containerId) {
     this.setInputChangeHandler = setInputChangeHandler;
     this.update = update;
 
-    const container = tryGetContainer(containerId);
+    const _container = tryGetContainer(containerId);
     const _inputsSelector = '.equation-form > .equation-form__input';
     const _inputASelector = '.equation-form #a';
     const _inputBSelector = '.equation-form #b';
@@ -53,11 +50,10 @@ function View(containerId) {
      * Renders view
      */
     function render() {
-        if (container) {
-            container.innerHTML += getLayout();
-            return;
+        if (!_container) {
+            throw 'Cannot render view';
         }
-        throw 'Cannot render view';
+        _container.innerHTML += getLayout();
     }
 
     /**
