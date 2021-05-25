@@ -13,17 +13,21 @@ namespace MaxLZp\Brickweb\Attributes;
  */
 function update(string $input): string
 {
-    $pattern = '/(?P<tag><a|<img|<script)(?P<attributes1>.*)(?P<link>src|href)="(?P<linkValue>\S*)"(?P<attributes2>.*>)/mUi';
+
+//    $pattern = '/(?P<tag><a|<img|<script)(?P<attributes1>.*)(?P<link>src|href)="(?P<linkValue>\S*)"(?P<attributes2>.*>)/mUi';
+    $pattern = '/(?P<tag><a|<img|<script)(?P<attributes1>.*)(?P<link>src|href)="(?P<linkValue>[^?"]*+)[?"]?(?P<query>.*)"(?P<attributes2>.*>)/mUi';
     $str = preg_replace_callback(
         $pattern,
         function(array $matches):string {
-//            return sprintf("%s%s%s=\"%s?v=%u\"%s", $matches[1], $matches[2], $matches[3], $matches[4], crc32($matches[4]), $matches[5]);
-            return sprintf("%s%s%s=\"%s?v=%u\"%s",
+            $updated = '' === $matches['query']
+                ? sprintf("?v=%u", crc32($matches['linkValue']))
+                : sprintf("%s&v=%u", $matches['query'], crc32($matches['linkValue'].$matches['query']));
+            return sprintf("%s%s%s=\"%s%s\"%s",
                 $matches['tag'],
                 $matches['attributes1'],
                 $matches['link'],
                 $matches['linkValue'],
-                crc32($matches['linkValue']),
+                $updated,
                 $matches['attributes2']);
         },
         $input);
