@@ -60,6 +60,11 @@ class AttributesTest extends TestCase
                 '<iframe src="URL">...</iframe>',
                 '<iframe src="URL">...</iframe>',
             ],
+            //new cases
+            [
+                '<img data-value1="123" src="img1.jpg?p=123" alt="img1" />',
+                '<img data-value1="123" src="img1.jpg?p=123&v=' . sprintf("%u", crc32("img1.jpg?p=test")) . '" alt="img1" />',
+            ],
         ];
     }
 }
